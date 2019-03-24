@@ -17,7 +17,6 @@ struct menuEntry
   enum states destinationState;
   char *label;
   SDL_Point position;
-  char *fontFace;
   unsigned short fontSize;
   SDL_Color fontColor;
 };
@@ -36,27 +35,23 @@ static struct menu MainMenu = {
     .selectedEntryIndex = 1,
     .entries = {
         {.selectable = 0,
-         .fontFace = "/Library/Fonts/Arial.ttf",
          .fontSize = 25,
          .fontColor = {0, 0, 0, 0},
          .label = "Bomberman",
          .position = {.x = 200, .y = 50}},
         {.selectable = 1,
-         .fontFace = "/Library/Fonts/Arial.ttf",
          .fontSize = 25,
          .fontColor = {0, 0, 0, 0},
          .label = "Host Game",
          .destinationState = HOST_GAME,
          .position = {.x = 100, .y = 100}},
         {.selectable = 1,
-         .fontFace = "/Library/Fonts/Arial.ttf",
          .fontSize = 25,
          .fontColor = {0, 0, 0, 0},
          .label = "Join Game",
          .destinationState = JOIN_GAME,
          .position = {.x = 100, .y = 200}},
         {.selectable = 1,
-         .fontFace = "/Library/Fonts/Arial.ttf",
          .fontSize = 25,
          .fontColor = {0, 0, 0, 0},
          .label = "Quit",
@@ -69,20 +64,17 @@ static struct menu ConfirmExitMenu = {
     .selectedEntryIndex = 2,
     .entries = {
         {.selectable = 0,
-         .fontFace = "/Library/Fonts/Arial.ttf",
          .fontSize = 25,
          .fontColor = {0, 0, 0, 0},
          .label = "Do you want to quit?",
          .position = {.x = 200, .y = 50}},
         {.selectable = 1,
-         .fontFace = "/Library/Fonts/Arial.ttf",
          .fontSize = 25,
          .fontColor = {0, 0, 0, 0},
          .label = "Yes",
          .destinationState = EXIT,
          .position = {.x = 100, .y = 100}},
         {.selectable = 1,
-         .fontFace = "/Library/Fonts/Arial.ttf",
          .fontSize = 25,
          .fontColor = {0, 0, 0, 0},
          .label = "No",
