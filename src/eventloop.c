@@ -14,11 +14,11 @@ void run(struct game *game)
     {
     case MAIN_MENU:
       handleMenuEvents(&MainMenu, game);
-      drawMenu(game, MainMenu);
+      drawMenu(MainMenu, game);
       break;
     case CONFIRM_EXIT:
       handleMenuEvents(&ConfirmExitMenu, game);
-      drawMenu(game, ConfirmExitMenu);
+      drawMenu(ConfirmExitMenu, game);
       break;
     default:
       break;

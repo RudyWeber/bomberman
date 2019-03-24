@@ -90,6 +90,6 @@ static struct menu ConfirmExitMenu = {
          .position = {.x = 300, .y = 100}}}};
 
 void handleMenuEvents(struct menu *, struct game *);
-void drawMenu(struct game *, struct menu);
+void drawMenu(struct menu, struct game *);
 
 #endif
