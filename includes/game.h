@@ -18,6 +18,11 @@ enum states
   EXIT
 };
 
+struct assets
+{
+  TTF_Font *defaultFont;
+};
+
 struct game
 {
   unsigned int width;
@@ -26,8 +31,8 @@ struct game
   SDL_Renderer *renderer;
   SDL_Event event;
   enum states state;
-  TTF_Font *font;
   SDL_bool inMenuKeyPressed;
+  struct assets *assets;
 };
 
 void initGame(struct game *);

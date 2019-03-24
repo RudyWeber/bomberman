@@ -58,12 +58,12 @@ void handleMenuEvents(struct menu *menu, struct game *game)
   }
 }
 
-void drawMenu(struct game *game, struct menu menu)
+void drawMenu(struct menu menu, struct game *game)
 {
   SDL_Color red = {255, 0, 0, 1};
   for (int i = 0; i < menu.length; i++)
   {
-    SDL_Surface *surface = TTF_RenderText_Solid(game->font,
+    SDL_Surface *surface = TTF_RenderText_Solid(game->assets->defaultFont,
                                                 menu.entries[i].label, menu.selectedEntryIndex == i ? red : menu.entries[i].fontColor);
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, surface);
     int textW = 0;

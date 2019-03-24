@@ -3,6 +3,35 @@
 #include "game.h"
 #include "log.h"
 
+struct assets *initAssets()
+{
+  struct assets *assets = NULL;
+
+  if ((assets = malloc(sizeof(struct assets))) == NULL)
+  {
+    fprintf(stderr, "Cannot malloc. File %s at line %d\n", __FILE__, __LINE__);
+    return NULL;
+  }
+
+  assets->defaultFont = TTF_OpenFont("/Library/Fonts/Arial.ttf", 25);
+
+  return assets;
+}
+
+void freeAssets(struct assets *assets)
+{
+  if (assets != NULL)
+  {
+    if (assets->defaultFont != NULL)
+    {
+      TTF_CloseFont(assets->defaultFont);
+    }
+
+    free(assets);
+    assets = NULL;
+  }
+}
+
 void initGame(struct game *game)
 {
   SDL_Event event;
@@ -28,20 +57,22 @@ void initGame(struct game *game)
     exit(EXIT_FAILURE);
   }
 
+  if ((game->assets = initAssets()) == NULL)
+  {
+    destroyGame(game);
+    SDL_Quit();
+    exit(EXIT_FAILURE);
+  }
+
   SDL_SetRenderDrawColor(game->renderer, 255, 255, 255, 255);
   SDL_RenderClear(game->renderer);
 
   SDL_RenderPresent(game->renderer);
-
-  game->font = TTF_OpenFont("/Library/Fonts/Arial.ttf", 25);
 }
 
 void destroyGame(struct game *game)
 {
-  if (game->font != NULL)
-  {
-    TTF_CloseFont(game->font);
-  }
+  freeAssets(game->assets);
 
   if (game->window != NULL)
   {
