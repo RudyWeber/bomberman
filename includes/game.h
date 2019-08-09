@@ -32,6 +32,7 @@ struct game
   SDL_Event event;
   enum states state;
   SDL_bool inMenuKeyPressed;
+  SDL_bool isServer;
   struct assets *assets;
 };
 
