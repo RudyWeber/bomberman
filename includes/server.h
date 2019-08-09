@@ -11,6 +11,11 @@ struct server
   int clientsFd[MAX_CONNECTION];
 };
 
+struct serverThreadArgs
+{
+  int fd;
+};
+
 void *runServer(void *);
 
 #endif

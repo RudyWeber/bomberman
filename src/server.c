@@ -72,20 +72,36 @@ void *runServer(void *voidGame)
     {
       server.numberOfClients++;
       server.clientsFd[server.numberOfClients - 1] = newConnectionFd;
+      printf("We should run a new thread handling client %d interactions\n", server.numberOfClients);
+      fflush(stdout);
     }
-
-    // we will do clever things later. Let's be dumb and close for now.
-    printf("Closing connection...\n");
-    fflush(stdout);
-
-    if (close(newConnectionFd) == -1)
+    else
     {
-      perror("close");
-      return (void *)-1;
+      printf("No more connections allowed\nClosing all connections because why not...\n");
+      fflush(stdout);
+      if (close(newConnectionFd) == -1)
+      {
+        perror("close");
+        return (void *)-1;
+      }
+
+      for (int i = 0; i < server.numberOfClients; i++)
+      {
+        printf("Closing client %d...\n", i + 1);
+        if (close(server.clientsFd[i]) == -1)
+        {
+          perror("close");
+          return (void *)-1;
+        }
+      }
+
+      fflush(stdout);
+      break;
     }
   }
 
   close(server.listenFd);
+  game->isServer = SDL_FALSE;
 
   return (void *)0;
 }

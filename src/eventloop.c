@@ -16,6 +16,10 @@ void run(struct game *game)
 
     SDL_RenderClear(game->renderer);
 
+    if (game->event.type == SDL_KEYDOWN && game->event.key.keysym.sym == SDLK_ESCAPE) {
+      game->state = MAIN_MENU;
+    }
+
     switch (game->state)
     {
     case MAIN_MENU:
@@ -30,7 +34,14 @@ void run(struct game *game)
       if (!serverStarted)
       {
         printf("Creating server thread\n");
-        pthread_create(&serverThread, NULL, runServer, game);
+        game->isServer = SDL_TRUE;
+
+        if (pthread_create(&serverThread, NULL, runServer, game) != 0)
+        {
+          fprintf(stderr, "Cannot create server thread\n");
+          exit(EXIT_FAILURE);
+        }
+
         serverStarted = SDL_TRUE;
       }
       break;

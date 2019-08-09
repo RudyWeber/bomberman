@@ -1,7 +1,9 @@
 #include <stdlib.h>
+#include <pthread.h>
 
 #include "game.h"
 #include "log.h"
+#include "server.h"
 
 struct assets *initAssets()
 {
@@ -41,6 +43,7 @@ void initGame(struct game *game)
   game->event = event;
   game->state = MAIN_MENU;
   game->inMenuKeyPressed = SDL_FALSE;
+  game->isServer = SDL_FALSE;
 
   if ((game->window = SDL_CreateWindow("Bomberman", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, game->width, game->height, SDL_WINDOW_SHOWN)) == NULL)
   {
